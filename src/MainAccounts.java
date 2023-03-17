@@ -5,6 +5,7 @@
 Необходимо создать собственное исключение InvalidEmail.
 При попытке создать Account нужно выбрасывать собственное исключение
  если в переданном адресе электронной почты нет символа '@'.*/
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -57,10 +58,14 @@ public class MainAccounts {
 
   // прочитать учётную запись
   public static Account readAccount(BufferedReader br) throws IOException {
+
     System.out.print("Введите имя: ");
     String name = br.readLine();
     System.out.print("Введите e-mail: ");
     String email = br.readLine();
+    if (!((email.contains("@") && (email.contains("."))))) {
+      throw new InvalidEmail(email);
+    }
     return new Account(name, email);
   }
 }
